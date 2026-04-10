@@ -1,0 +1,39 @@
+using UnityEngine;
+
+public class BigMapManager : MonoBehaviour
+{
+    [Header("Map Configurations")]
+    public GameObject terrainObject;
+    public float mapScaleX = 50.0f;
+    public float mapScaleZ = 50.0f;
+
+    [Header("View Settings")]
+    public Camera mainCamera;
+    public float renderDistance = 10000f;
+
+    void Start()
+    {
+        ApplyMapSettings();
+        ConfigureCamera();
+    }
+
+    void ApplyMapSettings()
+    {
+        if (terrainObject != null)
+        {
+            // Scaling the map to make it huge
+            terrainObject.transform.localScale = new Vector3(mapScaleX, 1, mapScaleZ);
+            Debug.Log("Big Map System: Map scaled to " + mapScaleX + "x" + mapScaleZ);
+        }
+    }
+
+    void ConfigureCamera()
+    {
+        if (mainCamera != null)
+        {
+            // Increasing far clip plane to see the whole big map
+            mainCamera.farClipPlane = renderDistance;
+            Debug.Log("Big Map System: Camera render distance set to " + renderDistance);
+        }
+    }
+}
